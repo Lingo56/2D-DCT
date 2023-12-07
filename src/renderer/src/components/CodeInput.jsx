@@ -2,52 +2,80 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const CodeInput = ({ onButtonClick }) => {
-  const [inputValue, setInputValue] = useState('')
+  const [matrixSize, setMatrixSize] = useState('')
+  const [matrixInput, setMatrixInput] = useState('')
   const [errorText, setErrorText] = useState('')
 
-  // Event handler for input change
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value)
-    // Clear error text when the input changes
-    setErrorText('')
+  // Event handler for matrix size change
+  const handleMatrixSizeChange = (event) => {
+    setMatrixSize(event.target.value)
+    setErrorText('') // Clear error text when the input changes
+  }
+
+  // Event handler for matrix input change
+  const handleMatrixInputChange = (event) => {
+    setMatrixInput(event.target.value)
+    setErrorText('') // Clear error text when the input changes
   }
 
   // Event handler for button click
   const handleButtonClick = () => {
-    const isValidInput = /^[ab]+$/.test(inputValue)
+    const parsedSize = parseInt(matrixSize, 10)
 
-    if (inputValue.length > 16) {
-      setErrorText('String has an invalid length (16 max)')
+    // Check if the matrix size is a valid integer
+    if (isNaN(parsedSize)) {
+      setErrorText('Please enter a valid integer for matrix size.')
       return
     }
 
-    if (!isValidInput) {
-      setErrorText('String contains characters other than A or B')
+    // Check if the matrix size is between 2 and 16
+    if (parsedSize < 2 || parsedSize > 16) {
+      setErrorText('Matrix size must be between 2 and 16 (inclusive).')
       return
     }
 
-    onButtonClick(inputValue.toUpperCase())
+    // Clear any previous error text
+    setErrorText('')
+
+    // Your logic for handling a valid input
+    // For example, you can call onButtonClick with the parsed size and matrix
+    onButtonClick({ size: parsedSize, matrix: matrixInput })
   }
 
   return (
     <div>
       <div>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Enter a sequence of As and Bs (16 max)"
-          size="50"
-          style={{ width: '350px', padding: '0px 6px', marginRight: '3px' }}
-        />
+        <label>
+          Enter N (an integer between 2 and 16):
+          <input
+            type="text"
+            value={matrixSize}
+            onChange={handleMatrixSizeChange}
+            placeholder="Enter an integer"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Enter NxN Matrix:
+          <textarea
+            value={matrixInput}
+            onChange={handleMatrixInputChange}
+            placeholder={`Enter a ${matrixSize}x${matrixSize} matrix`}
+            rows={matrixSize}
+            cols={matrixSize * 2}
+          />
+        </label>
+      </div>
+
+      <div>
         <button style={{ padding: '0px 6px' }} onClick={handleButtonClick}>
-          Encode
+          Generate
         </button>
       </div>
 
-      <div style={{ paddingTop: '5px' }}>
-        {errorText && <p style={{ color: 'red', marginBottom: '10px' }}>{errorText}</p>}
-      </div>
+      {errorText && <p style={{ color: 'red', marginBottom: '10px' }}>{errorText}</p>}
     </div>
   )
 }

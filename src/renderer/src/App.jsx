@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ArithmeticCode from './components/ArithmeticCode'
+import DiscreteCosineTransform from './components/DiscreteCosineTransform'
 import CodeInput from './components/CodeInput'
 
 function App() {
@@ -23,9 +23,9 @@ function App() {
       className="App"
     >
       <div style={{ textAlignLast: 'center', margin: 'auto', height: '150px' }}>
-        <h1>Arithmetic Coding</h1>
+        <h1>Discrete Cosine Transform</h1>
 
-        {codeValue && <ArithmeticCode codeText={codeValue} />}
+        {codeValue && <DiscreteCosineTransform codeText={codeValue} />}
 
         <div style={{ paddingTop: '10px' }}>
           <CodeInput onButtonClick={handleCodeValue} />
