@@ -71,7 +71,7 @@ const MatrixInput = ({ onButtonClick }) => {
 
     console.log(matrix)
 
-    onButtonClick({ matrix })
+    onButtonClick(matrix)
   }
 
   return (
