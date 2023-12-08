@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const DiscreteCosineTransform = ({ codeText }) => {
+const DiscreteCosineTransform = ({ matrix }) => {
   const [highDecodedValue, setHighDecodedValue] = useState(0)
   const [lowDecodedValue, setLowDecodedValue] = useState(0)
 
@@ -16,12 +16,13 @@ const DiscreteCosineTransform = ({ codeText }) => {
     }
 
     fetchData()
-  }, [codeText])
+  }, [matrix])
 
   return (
     <div>
+      <hr style={{ width: '100%', paddingTop: '10px' }} />
       <div style={{ margin: '10px', verticalAlign: 'top' }}>
-        <p>Code: {codeText}</p>
+        <p>Code: {matrix}</p>
         <p>High Decoded Value: {highDecodedValue}</p>
         <p>Low Decoded Value: {lowDecodedValue}</p>
       </div>
@@ -30,7 +31,7 @@ const DiscreteCosineTransform = ({ codeText }) => {
 }
 
 DiscreteCosineTransform.propTypes = {
-  codeText: PropTypes.string.isRequired // String being decoded
+  matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired // Matrix of integers
 }
 
 export default DiscreteCosineTransform

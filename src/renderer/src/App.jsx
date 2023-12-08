@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import DiscreteCosineTransform from './components/DiscreteCosineTransform'
-import CodeInput from './components/CodeInput'
+import MatrixInput from './components/MatrixInput'
 
 function App() {
   // State to manage the input value
-  const [codeValue, setCodeValue] = useState(null)
+  const [matrix, setMatrix] = useState(null)
 
   // Event handler for button click
   const handleCodeValue = (value) => {
-    setCodeValue(value)
+    setMatrix(value)
   }
 
   return (
@@ -22,13 +22,13 @@ function App() {
       }}
       className="App"
     >
-      <div style={{ textAlignLast: 'center', margin: 'auto', height: '150px' }}>
+      <div style={{ textAlignLast: 'center', margin: 'auto' }}>
         <h1>Discrete Cosine Transform</h1>
 
-        {codeValue && <DiscreteCosineTransform codeText={codeValue} />}
+        {matrix && <DiscreteCosineTransform matrix={matrix} />}
 
         <div style={{ paddingTop: '10px' }}>
-          <CodeInput onButtonClick={handleCodeValue} />
+          <MatrixInput onButtonClick={handleCodeValue} />
         </div>
       </div>
     </div>
