@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: wav-compress
+productName: 2d-dct
 directories:
   buildResources: build
 files:
@@ -11,7 +11,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: wav-compress
+  executableName: 2d-dct
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

@@ -50,7 +50,7 @@ const DiscreteCosineTransform = ({ matrix }) => {
           for (let x = 0; x < numRows; x++) {
             for (let y = 0; y < numCols; y++) {
               sum +=
-                matrix[x][y] *
+                matrix[y][x] *
                 Math.cos(((2 * x + 1) * u * Math.PI) / (2 * numRows)) *
                 Math.cos(((2 * y + 1) * v * Math.PI) / (2 * numCols))
             }
